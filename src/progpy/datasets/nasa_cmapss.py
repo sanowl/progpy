@@ -5,6 +5,7 @@ import numpy as np
 import pandas as pd
 import requests
 import zipfile
+from security import safe_requests
 
 cache = None
 URL = "https://data.nasa.gov/download/ff5v-kuh6/application%2Fzip"
@@ -83,7 +84,7 @@ def load_data(dataset_id: int) -> tuple:
     if cache is None:
         # Download data
         try:
-            response = requests.get(URL, allow_redirects=True)
+            response = safe_requests.get(URL, allow_redirects=True)
         except requests.exceptions.RequestException: 
             # handle chain of errors
             raise ConnectionError("Data download failed. This may be because of issues with your internet connection or the datasets may have moved. Please check your internet connection and make sure you're using the latest version of progpy. If the problem persists, please submit an issue on the progpy issue page (https://github.com/nasa/progpy/issues) for further investigation.")

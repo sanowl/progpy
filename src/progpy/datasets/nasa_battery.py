@@ -6,6 +6,7 @@ import numpy as np
 import pandas as pd
 from scipy.io import loadmat
 import zipfile
+from security import safe_requests
 
 # Map of battery to url for data
 urls = {
@@ -76,7 +77,7 @@ def load_data(batt_id: str) -> tuple:
     if url not in cache:
         # Download data
         try:
-            response = requests.get(url, allow_redirects=True)
+            response = safe_requests.get(url, allow_redirects=True)
         except requests.exceptions.RequestException:  # handle chain of errors
             raise ConnectionRefusedError("Data download failed. This may be because of issues with your internet connection or the datasets may have moved. Please check your internet connection and make sure you're using the latest version of progpy. If the problem persists, please submit an issue on the progpy issue page (https://github.com/nasa/progpy/issues) for further investigation.")
 
