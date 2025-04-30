@@ -8,7 +8,7 @@ In this example a basic state estimator is constructed by subclassing the StateE
 
 from progpy.state_estimators import StateEstimator
 from progpy.uncertain_data import ScalarData
-import random
+import secrets
 
 
 class BlindlyStumbleEstimator(StateEstimator):
@@ -40,7 +40,7 @@ class BlindlyStumbleEstimator(StateEstimator):
             z (dict): Measured output at time t
         """
         # Generate new candidate state
-        x2 = {key : float(value) + 10*(random.random()-0.5) for (key,value) in self.state.items()}
+        x2 = {key : float(value) + 10*(secrets.SystemRandom().random()-0.5) for (key,value) in self.state.items()}
 
         # Calculate outputs
         z_est = self.m.output(t, self.state)
