@@ -7,6 +7,7 @@ Example of serializing and de-serializing a battery model using JSON and picklin
 import matplotlib.pyplot as plt
 import pickle
 from progpy.models import BatteryElectroChemEOD as Battery
+import fickling
 
 def run_example():  
     ## Step 1: Create a model object
@@ -36,7 +37,7 @@ def run_example():
 
     # METHOD 2: Serialize by pickling
     pickle.dump(batt, open('model_save_pkl.pkl','wb'))
-    load_pkl = pickle.load(open('model_save_pkl.pkl','rb'))
+    load_pkl = fickling.load(open('model_save_pkl.pkl','rb'))
 
     ## Step 3: Simulate to threshold and compare results
     options_sim = {
